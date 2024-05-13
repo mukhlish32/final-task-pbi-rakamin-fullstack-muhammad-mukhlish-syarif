@@ -2,14 +2,14 @@
 ### Pendahuluan
 Dokumentasi ini menjelaskan API yang digunakan dalam pengembangan fitur pengunggahan dan penghapusan gambar pada tiap user. Fitur ini bertujuan untuk meningkatkan engagement pengguna dengan memberikan kemampuan untuk mempersonalisasi foto profil mereka. Dokumentasi ini mencakup spesifikasi API yang harus diikuti oleh pengembang dalam pengembangan fitur tersebut.
 
-### Technologies Used
+### Teknologi
 
 - **GoLang**: Bahasa pemrograman utama yang digunakan untuk mengembangkan API.
 - **Gin**: Framework web Go yang digunakan untuk membuat endpoint API.
 - **GORM**: ORM (Object-Relational Mapping) untuk Go, digunakan untuk berinteraksi dengan database.
 - **Golang JWT**: Library untuk mengimplementasikan autentikasi berbasis JWT (JSON Web Tokens).
 
-### Installing & Running the Application
+### Instalasi & Running Aplikasi
 
 1. **Persyaratan Awal**:
    - Pastikan telah menginstal Go di sistem. Kunjungi [dokumentasi resmi Go](https://golang.org/doc/install) untuk instruksi instalasi.
