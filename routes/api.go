@@ -19,7 +19,6 @@ func SetupRouter() *gin.Engine {
 	router.DELETE("/users/:userId", userController.DeleteUser)
 
 	// Photo Endpoints
-	router.POST("/photos", photoController.UploadPhoto)
 	router.GET("/photos", photoController.GetPhotos)
 	router.PUT("/photos/:photoId", photoController.UpdatePhoto)
 	router.DELETE("/photos/:photoId", photoController.DeletePhoto)
