@@ -23,7 +23,7 @@ func NewUserController() *UserController {
 
 func (uc *UserController) Register(c *gin.Context) {
 	var user models.User
-	if err := c.BindJSON(&user); err != nil {
+	if err := c.Bind(&user); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -41,6 +41,21 @@ func (uc *UserController) Register(c *gin.Context) {
 	}
 	user.Password = string(hashedPassword)
 
+	// Cek dan upload photo
+	var photo *models.Photo
+	if _, _, err := c.Request.FormFile("file"); err == nil {
+		photo, err = uploadAndCreatePhoto(c)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+	}
+
+	if photo != nil {
+		user.Photos = append(user.Photos, *photo)
+	}
+
+	// Insert data
 	if err := uc.DB.Create(&user).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -51,7 +66,7 @@ func (uc *UserController) Register(c *gin.Context) {
 
 func (uc *UserController) Login(c *gin.Context) {
 	var user models.User
-	if err := c.BindJSON(&user); err != nil {
+	if err := c.Bind(&user); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -88,7 +103,7 @@ func (uc *UserController) UpdateUser(c *gin.Context) {
 	}
 
 	var updatedUser models.User
-	if err := c.BindJSON(&updatedUser); err != nil {
+	if err := c.Bind(&updatedUser); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
